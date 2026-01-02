@@ -1,13 +1,7 @@
-// src/server.ts
-import http from 'http';
+import app from './app';
 
 const PORT: number = 3000;
 
-const server = http.createServer((_req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Server is running with TypeScript!');
-});
-
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Express server running on port ${PORT}`);
 });
