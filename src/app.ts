@@ -7,6 +7,8 @@ const app: Application = express();
 app.use(express.json());
 
 app.use('/api', homeRoutes);
+
+// Default route
 app.get('/', (_req: Request, res: Response) => {
     res.json({ message: 'Hello from Express + TypeScript!' });
 });
