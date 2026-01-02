@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    /* Base Options */
+    "target": "ES2022",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,             /* The most important setting: Enables all strict type-checking options */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Advanced Checks (Senior Level) */
+    "noImplicitAny": true,      /* Error on variables with implied 'any' type */
+    "noUnusedLocals": true,     /* Error if you declare a variable but don't use it */
+    "noUnusedParameters": true, /* Error if function params are unused */
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
