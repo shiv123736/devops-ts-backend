@@ -3,7 +3,7 @@ import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 
 const app: Application = express();
-
+const x: number = "this is not a number";
 // Middleware to parse JSON bodies (formerly body-parser)
 app.use(express.json());
 
