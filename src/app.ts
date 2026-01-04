@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes';
 const app: Application = express();
 // Middleware to parse JSON bodies (formerly body-parser)
 app.use(express.json());
+const test: number = "Still not a number";
 
 app.use('/api', homeRoutes);
 app.use('/api', userRoutes);
