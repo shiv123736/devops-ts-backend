@@ -1,0 +1,27 @@
+
+services:
+  # Service 1: Your Application
+  api:
+    build: .              # "Build the image from the Dockerfile in current dir"
+    ports:
+      - "3000:3000"       # "Open port 3000 to my Windows machine"
+    environment:
+      - PORT=3000
+    depends_on:
+      - db                # "Don't start me until 'db' is running"
+
+  # Service 2: The Database
+  db:
+    image: postgres:15-alpine  # "Download this official image"
+    ports:
+      - "5432:5432"            # (Optional) Open DB port so you can check it with a tool
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # "Save DB files here so they survive restarts"
+
+# Define the volume storage
+volumes:
+  postgres_data:
