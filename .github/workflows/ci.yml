@@ -31,3 +31,7 @@ jobs:
       # Step 4: Verify the build works
       - name: Compile TypeScript
         run: npm run build
+
+      # Step 5: Verify Docker build works
+      - name: Build Docker Image
+        run: docker build -t my-ts-starter .
