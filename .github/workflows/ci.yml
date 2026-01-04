@@ -1,37 +1,45 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
-# Trigger: When does this run?
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
-# Jobs: The actual work
 jobs:
-  build-and-test:
-    name: Build & Check
-    runs-on: ubuntu-latest  # "Rent" a latest Linux server
+  build-and-deploy:
+    name: Build, Test & Push
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Download code from the repo
+      # 1. Get the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Install Node.js
+      # 2. Install Node & Test TypeScript
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Verify the build works
-      - name: Compile TypeScript
+      - name: Compile TypeScript (Check for Errors)
         run: npm run build
 
-      # Step 5: Verify Docker build works
-      - name: Build Docker Image
-        run: docker build -t my-ts-starter .
+      # 3. Log in to Docker Hub (The "Vault" opens here)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 4. Build and Push the Image
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          # This creates: shiv123736/devops-ts-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-ts-backend:latest
