@@ -3,9 +3,11 @@ import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 
 const app: Application = express();
+
 // Middleware to parse JSON bodies (formerly body-parser)
 app.use(express.json());
 
+// Register routes
 app.use('/api', homeRoutes);
 app.use('/api', userRoutes);
 
