@@ -13,7 +13,7 @@ app.use('/api', userRoutes);
 
 // Default route
 app.get('/', (_req: Request, res: Response) => {
-    res.json({ message: 'Hello from Express + TypeScript!' });
+    res.json({ message: 'Updated: Hello from Express + TypeScript!' });
 });
 
 export default app;
